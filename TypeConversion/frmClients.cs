@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 
 namespace TypeConversion
@@ -195,6 +197,26 @@ namespace TypeConversion
                 row.Cells[5].Value = GetGender(rdbMale.Checked, rdbFemale.Checked, rdbUnknown.Checked);
                 row.Cells[6].Value = dtpBirthDate.Value;
             }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            string[] lines = new string[grid.RowCount];
+            
+            for (int i  = 0; i < grid.RowCount; i++)
+            {
+                DataGridViewRow row = grid.Rows[i];
+                lines[i] = row.Cells[0].Value + ";"
+                    + row.Cells[1].Value + ";"
+                    + row.Cells[2].Value + ";"
+                    + row.Cells[3].Value + ";"
+                    + row.Cells[4].Value + ";"
+                    + row.Cells[5].Value + ";"
+                    + row.Cells[6].Value;
+            }
+
+            string path = @"D:\klantenbeheer\klanten.txt";
+            File.WriteAllLines(path, lines);
         }
     }
 }

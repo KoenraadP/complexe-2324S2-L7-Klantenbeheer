@@ -55,6 +55,7 @@ namespace TypeConversion
             this.Gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.birthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlBack = new System.Windows.Forms.Panel();
+            this.btnSave = new System.Windows.Forms.Button();
             this.genderBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.SuspendLayout();
@@ -302,11 +303,22 @@ namespace TypeConversion
             this.pnlBack.Size = new System.Drawing.Size(889, 285);
             this.pnlBack.TabIndex = 15;
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(567, 116);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(291, 23);
+            this.btnSave.TabIndex = 16;
+            this.btnSave.Text = "Bewaren";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // frmClients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(876, 450);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grid);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
@@ -361,6 +373,7 @@ namespace TypeConversion
         private System.Windows.Forms.DataGridViewTextBoxColumn BirthPlace;
         private System.Windows.Forms.DataGridViewTextBoxColumn Gender;
         private System.Windows.Forms.DataGridViewTextBoxColumn birthDate;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 
