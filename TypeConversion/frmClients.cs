@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -19,6 +18,7 @@ namespace TypeConversion
         {
             cbxBirthPlace.SelectedIndex = 0;
             rdbUnknown.Checked = true;
+            LoadClients();
         }
 
         private bool InputValidation(string clientId, string firstName, 
@@ -162,24 +162,24 @@ namespace TypeConversion
 
         private void grid_SelectionChanged(object sender, EventArgs e)
         {
-            DataGridViewRow row = grid.SelectedRows[0];
-            txtClientId.Text = row.Cells[0].Value.ToString();
-            txtFirstName.Text = row.Cells[1].Value.ToString();
-            txtLastName.Text = row.Cells[2].Value.ToString();
-            dtpBirthDate.Value = (DateTime)row.Cells[6].Value;
-            cbxBirthPlace.SelectedIndex = cbxBirthPlace.FindStringExact(row.Cells[4].Value.ToString());
-            switch (row.Cells[5].Value.ToString())
-            {
-                case "Man":
-                    rdbMale.Checked = true;
-                    break;
-                case "Vrouw":
-                    rdbFemale.Checked = true;
-                    break;
-                case "Onbekend":
-                    rdbUnknown.Checked = true;
-                    break;
-            }
+                DataGridViewRow row = grid.SelectedRows[0];
+                txtClientId.Text = row.Cells[0].Value.ToString();
+                txtFirstName.Text = row.Cells[1].Value.ToString();
+                txtLastName.Text = row.Cells[2].Value.ToString();
+                dtpBirthDate.Value = (DateTime)row.Cells[6].Value;
+                cbxBirthPlace.SelectedIndex = cbxBirthPlace.FindStringExact(row.Cells[4].Value.ToString());
+                switch (row.Cells[5].Value.ToString())
+                {
+                    case "Man":
+                        rdbMale.Checked = true;
+                        break;
+                    case "Vrouw":
+                        rdbFemale.Checked = true;
+                        break;
+                    case "Onbekend":
+                        rdbUnknown.Checked = true;
+                        break;
+                }    
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -217,6 +217,19 @@ namespace TypeConversion
 
             string path = @"D:\klantenbeheer\klanten.txt";
             File.WriteAllLines(path, lines);
+        }
+
+        private void LoadClients()
+        {
+            string path = @"D:\klantenbeheer\klanten.txt";
+            string[] lines = File.ReadAllLines(path);
+
+            foreach (string line in lines)
+            {
+                string[] splitLine = line.Split(';');
+                AddClient(Convert.ToInt32(splitLine[0]), splitLine[1], splitLine[2], Convert.ToInt32(splitLine[3]),
+                    splitLine[4], splitLine[5], Convert.ToDateTime(splitLine[6]));
+            }
         }
     }
 }
