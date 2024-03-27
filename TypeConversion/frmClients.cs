@@ -190,19 +190,22 @@ namespace TypeConversion
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            DataGridViewRow row = grid.SelectedRows[0];
-
-            if (InputValidation(txtClientId.Text, txtFirstName.Text,
-                    txtLastName.Text, dtpBirthDate.Value, true))
+            if (grid.SelectedRows.Count > 0)
             {
-                row.Cells[0].Value = txtClientId.Text;
-                row.Cells[1].Value = txtFirstName.Text;
-                row.Cells[2].Value = txtLastName.Text;
-                row.Cells[3].Value = CalculateAge(dtpBirthDate.Value);
-                row.Cells[4].Value = cbxBirthPlace.SelectedItem.ToString();
-                row.Cells[5].Value = GetGender(rdbMale.Checked, rdbFemale.Checked);
-                row.Cells[6].Value = dtpBirthDate.Value;
-            }
+                DataGridViewRow row = grid.SelectedRows[0];
+
+                if (InputValidation(txtClientId.Text, txtFirstName.Text,
+                        txtLastName.Text, dtpBirthDate.Value, true))
+                {
+                    row.Cells[0].Value = txtClientId.Text;
+                    row.Cells[1].Value = txtFirstName.Text;
+                    row.Cells[2].Value = txtLastName.Text;
+                    row.Cells[3].Value = CalculateAge(dtpBirthDate.Value);
+                    row.Cells[4].Value = cbxBirthPlace.SelectedItem.ToString();
+                    row.Cells[5].Value = GetGender(rdbMale.Checked, rdbFemale.Checked);
+                    row.Cells[6].Value = dtpBirthDate.Value;
+                }
+            }            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
