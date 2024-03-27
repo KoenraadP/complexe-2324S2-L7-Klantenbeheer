@@ -39,14 +39,16 @@ namespace TypeConversion
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.dtpBirthDate = new System.Windows.Forms.DateTimePicker();
             this.cbxBirthPlace = new System.Windows.Forms.ComboBox();
-            this.genderBox = new System.Windows.Forms.GroupBox();
-            this.rdbUnknown = new System.Windows.Forms.RadioButton();
-            this.rdbFemale = new System.Windows.Forms.RadioButton();
-            this.rdbMale = new System.Windows.Forms.RadioButton();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.grid = new System.Windows.Forms.DataGridView();
+            this.pnlBack = new System.Windows.Forms.Panel();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.genderBox = new System.Windows.Forms.GroupBox();
+            this.rdbUnknown = new System.Windows.Forms.RadioButton();
+            this.rdbFemale = new System.Windows.Forms.RadioButton();
+            this.rdbMale = new System.Windows.Forms.RadioButton();
             this.ClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,10 +56,8 @@ namespace TypeConversion
             this.BirthPlace = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.birthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlBack = new System.Windows.Forms.Panel();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.genderBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
+            this.genderBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblClientId
@@ -154,6 +154,76 @@ namespace TypeConversion
             this.cbxBirthPlace.Sorted = true;
             this.cbxBirthPlace.TabIndex = 9;
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(567, 20);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(291, 23);
+            this.btnAdd.TabIndex = 11;
+            this.btnAdd.Text = "Klant toevoegen";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(567, 57);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(291, 23);
+            this.btnEdit.TabIndex = 12;
+            this.btnEdit.Text = "Klant bijwerken";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(567, 94);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(291, 23);
+            this.btnDelete.TabIndex = 13;
+            this.btnDelete.Text = "Klant verwijderen";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // grid
+            // 
+            this.grid.AllowUserToAddRows = false;
+            this.grid.AllowUserToDeleteRows = false;
+            this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ClientId,
+            this.FirstName,
+            this.LastName,
+            this.Age,
+            this.BirthPlace,
+            this.Gender,
+            this.birthDate});
+            this.grid.Location = new System.Drawing.Point(32, 182);
+            this.grid.Name = "grid";
+            this.grid.ReadOnly = true;
+            this.grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grid.Size = new System.Drawing.Size(826, 256);
+            this.grid.TabIndex = 14;
+            this.grid.SelectionChanged += new System.EventHandler(this.grid_SelectionChanged);
+            // 
+            // pnlBack
+            // 
+            this.pnlBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.pnlBack.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.pnlBack.Location = new System.Drawing.Point(-7, 165);
+            this.pnlBack.Name = "pnlBack";
+            this.pnlBack.Size = new System.Drawing.Size(901, 285);
+            this.pnlBack.TabIndex = 15;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(567, 131);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(291, 23);
+            this.btnSave.TabIndex = 16;
+            this.btnSave.Text = "Bewaren";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // genderBox
             // 
             this.genderBox.Controls.Add(this.rdbUnknown);
@@ -199,58 +269,6 @@ namespace TypeConversion
             this.rdbMale.Text = "Man";
             this.rdbMale.UseVisualStyleBackColor = true;
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(567, 20);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(291, 23);
-            this.btnAdd.TabIndex = 11;
-            this.btnAdd.Text = "Klant toevoegen";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(567, 57);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(291, 23);
-            this.btnEdit.TabIndex = 12;
-            this.btnEdit.Text = "Klant bijwerken";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(567, 94);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(291, 23);
-            this.btnDelete.TabIndex = 13;
-            this.btnDelete.Text = "Klant verwijderen";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // grid
-            // 
-            this.grid.AllowUserToAddRows = false;
-            this.grid.AllowUserToDeleteRows = false;
-            this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ClientId,
-            this.FirstName,
-            this.LastName,
-            this.Age,
-            this.BirthPlace,
-            this.Gender,
-            this.birthDate});
-            this.grid.Location = new System.Drawing.Point(32, 182);
-            this.grid.MultiSelect = false;
-            this.grid.Name = "grid";
-            this.grid.ReadOnly = true;
-            this.grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grid.Size = new System.Drawing.Size(826, 256);
-            this.grid.TabIndex = 14;
-            this.grid.SelectionChanged += new System.EventHandler(this.grid_SelectionChanged);
-            // 
             // ClientId
             // 
             this.ClientId.HeaderText = "ClientId";
@@ -294,25 +312,6 @@ namespace TypeConversion
             this.birthDate.ReadOnly = true;
             this.birthDate.Visible = false;
             // 
-            // pnlBack
-            // 
-            this.pnlBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.pnlBack.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.pnlBack.Location = new System.Drawing.Point(-7, 165);
-            this.pnlBack.Name = "pnlBack";
-            this.pnlBack.Size = new System.Drawing.Size(901, 285);
-            this.pnlBack.TabIndex = 15;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(567, 131);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(291, 23);
-            this.btnSave.TabIndex = 16;
-            this.btnSave.Text = "Bewaren";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // frmClients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,9 +336,9 @@ namespace TypeConversion
             this.Controls.Add(this.pnlBack);
             this.Name = "frmClients";
             this.Text = "Klantenbeheer";
+            ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             this.genderBox.ResumeLayout(false);
             this.genderBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -357,15 +356,16 @@ namespace TypeConversion
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.DateTimePicker dtpBirthDate;
         private System.Windows.Forms.ComboBox cbxBirthPlace;
-        private System.Windows.Forms.GroupBox genderBox;
-        private System.Windows.Forms.RadioButton rdbUnknown;
-        private System.Windows.Forms.RadioButton rdbFemale;
-        private System.Windows.Forms.RadioButton rdbMale;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView grid;
         private System.Windows.Forms.Panel pnlBack;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.GroupBox genderBox;
+        private System.Windows.Forms.RadioButton rdbMale;
+        private System.Windows.Forms.RadioButton rdbUnknown;
+        private System.Windows.Forms.RadioButton rdbFemale;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientId;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
@@ -373,7 +373,6 @@ namespace TypeConversion
         private System.Windows.Forms.DataGridViewTextBoxColumn BirthPlace;
         private System.Windows.Forms.DataGridViewTextBoxColumn Gender;
         private System.Windows.Forms.DataGridViewTextBoxColumn birthDate;
-        private System.Windows.Forms.Button btnSave;
     }
 }
 

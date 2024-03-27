@@ -21,23 +21,21 @@ namespace TypeConversion
         }
 
         private bool InputValidation(string clientId, string firstName, 
-            string lastName, bool isUpdate)
+            string lastName, DateTime date, bool isUpdate)
         {
-            if (!String.IsNullOrEmpty(txtClientId.Text) &&
-                !String.IsNullOrEmpty(txtFirstName.Text) &&
-                !String.IsNullOrEmpty(txtLastName.Text))
+            if (!string.IsNullOrEmpty(clientId) &&
+                !string.IsNullOrEmpty(firstName) &&
+                !string.IsNullOrEmpty(lastName))
             {
-                int iClientId = ConvertClientId(txtClientId.Text);
-                int iAge = CalculateAge(dtpBirthDate.Value);
-                string sGender = GetGender(rdbMale.Checked, rdbFemale.Checked, 
-                    rdbUnknown.Checked);
+                int id = ConvertClientId(clientId);
+                int age = CalculateAge(date);
 
                 if (!isUpdate)
                 {
                     if (!ValidClientId(txtClientId.Text)) return false;
                 }
 
-                if (iClientId != -1 && iAge != -1)
+                if (id != -1 && age >= 18)
                 {
                     return true;
                 }
@@ -60,40 +58,31 @@ namespace TypeConversion
             }
         }
 
-        private int CalculateAge(DateTime birthDate)
+        private int CalculateAge(DateTime date)
         {
-            try
+            DateTime today = DateTime.Now;
+            int iAge = today.Year - date.Year;
+            if (today.DayOfYear > date.DayOfYear)
             {
-                DateTime today = DateTime.Now;
-                int iAge = today.Year - birthDate.Year;
-                if (today.DayOfYear > birthDate.DayOfYear)
-                {
-                    return iAge;
-                }
-                return (iAge - 1);
+                return iAge;
             }
-            catch
-            {
-                return -1;
-            }
+            return (iAge - 1);
         }
 
-        private string GetGender(bool isMale, bool isFemale,
-            bool isNotSaying)
+        private string GetGender(bool isMale, bool isFemale)
         {
             if (isMale) return "Man";
             if (isFemale) return "Vrouw";
-            if (isNotSaying) return "Onbekend";
-            return null;
+            return "Onbekend";
         }
 
         private bool AddClient(int clientId, string firstName,
-            string lastName, int age, string birthPlace, string gender, DateTime birthDate)
+            string lastName, int age, string birthPlace, string gender, DateTime date)
         {
             try
             {
                 grid.Rows.Add(clientId, firstName, lastName,
-                    age, birthPlace, gender, birthDate);
+                    age, birthPlace, gender, date);
                 return true;
             }
             catch
@@ -102,19 +91,12 @@ namespace TypeConversion
             }
         }
 
-        private bool DeleteClients()
+        private void DeleteClients()
         {
-            if (grid.SelectedRows.Count > 0)
+            foreach (DataGridViewRow item in grid.SelectedRows)
             {
-                foreach (DataGridViewRow item in grid.SelectedRows)
-                {
-                    grid.Rows.RemoveAt(item.Index);
-                }
-
-                return true;
+                grid.Rows.RemoveAt(item.Index);
             }
-            
-            return false;
         }
 
         private bool ValidClientId(string id)
@@ -149,16 +131,19 @@ namespace TypeConversion
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (InputValidation(txtClientId.Text, txtFirstName.Text,
-                    txtLastName.Text, false))
+                    txtLastName.Text, dtpBirthDate.Value, false))
             {
                 if (AddClient(Convert.ToInt32(txtClientId.Text), txtFirstName.Text, 
                         txtLastName.Text, CalculateAge(dtpBirthDate.Value), 
                         cbxBirthPlace.SelectedItem.ToString(), GetGender(rdbMale.Checked, 
-                            rdbFemale.Checked, rdbUnknown.Checked), dtpBirthDate.Value))
+                            rdbFemale.Checked), dtpBirthDate.Value))
                 {
                     MessageBox.Show("Klant toegevoegd", "Toegevoegd",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
+
+                    grid.ClearSelection();
+                    grid.Rows[grid.Rows.Count-1].Selected = true;
                 } 
             }
         }
@@ -179,14 +164,15 @@ namespace TypeConversion
 
         private void grid_SelectionChanged(object sender, EventArgs e)
         {
-            if (grid.Rows.Count > 0)
+            if (grid.SelectedRows.Count > 0)
             {
                 DataGridViewRow row = grid.SelectedRows[0];
                 txtClientId.Text = row.Cells[0].Value.ToString();
                 txtFirstName.Text = row.Cells[1].Value.ToString();
                 txtLastName.Text = row.Cells[2].Value.ToString();
                 dtpBirthDate.Value = (DateTime)row.Cells[6].Value;
-                cbxBirthPlace.SelectedIndex = cbxBirthPlace.FindStringExact(row.Cells[4].Value.ToString());
+                //cbxBirthPlace.SelectedIndex = cbxBirthPlace.FindStringExact(row.Cells[4].Value.ToString());
+                cbxBirthPlace.SelectedItem = row.Cells[4].Value;
                 switch (row.Cells[5].Value.ToString())
                 {
                     case "Man":
@@ -207,14 +193,14 @@ namespace TypeConversion
             DataGridViewRow row = grid.SelectedRows[0];
 
             if (InputValidation(txtClientId.Text, txtFirstName.Text,
-                    txtLastName.Text, true))
+                    txtLastName.Text, dtpBirthDate.Value, true))
             {
                 row.Cells[0].Value = txtClientId.Text;
                 row.Cells[1].Value = txtFirstName.Text;
                 row.Cells[2].Value = txtLastName.Text;
                 row.Cells[3].Value = CalculateAge(dtpBirthDate.Value);
                 row.Cells[4].Value = cbxBirthPlace.SelectedItem.ToString();
-                row.Cells[5].Value = GetGender(rdbMale.Checked, rdbFemale.Checked, rdbUnknown.Checked);
+                row.Cells[5].Value = GetGender(rdbMale.Checked, rdbFemale.Checked);
                 row.Cells[6].Value = dtpBirthDate.Value;
             }
         }
@@ -247,6 +233,5 @@ namespace TypeConversion
 
             File.WriteAllLines(path, lines);
         }
-
     }
 }
