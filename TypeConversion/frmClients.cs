@@ -13,7 +13,6 @@ namespace TypeConversion
         }
 
         #region methods
-
         private void Init()
         {
             cbxBirthPlace.SelectedIndex = 0;
@@ -127,6 +126,24 @@ namespace TypeConversion
             return true;
         }
 
+        private void LoadClients()
+        {
+            // pad aanpassen indien nodig
+            string path = @"D:\klantenbeheer\klanten.txt";
+
+            if (File.Exists(path))
+            {
+                string[] lines = File.ReadAllLines(path);
+
+                foreach (string line in lines)
+                {
+                    string[] splitLine = line.Split(';');
+                    AddClient(Convert.ToInt32(splitLine[0]), splitLine[1], splitLine[2], Convert.ToInt32(splitLine[3]),
+                        splitLine[4], splitLine[5], Convert.ToDateTime(splitLine[6]));
+                }
+            }            
+        }
+
         #endregion
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -162,6 +179,8 @@ namespace TypeConversion
 
         private void grid_SelectionChanged(object sender, EventArgs e)
         {
+            if (grid.Rows.Count > 0)
+            {
                 DataGridViewRow row = grid.SelectedRows[0];
                 txtClientId.Text = row.Cells[0].Value.ToString();
                 txtFirstName.Text = row.Cells[1].Value.ToString();
@@ -179,7 +198,8 @@ namespace TypeConversion
                     case "Onbekend":
                         rdbUnknown.Checked = true;
                         break;
-                }    
+                }
+            }                   
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -215,21 +235,18 @@ namespace TypeConversion
                     + row.Cells[6].Value;
             }
 
-            string path = @"D:\klantenbeheer\klanten.txt";
+            // pad aanpassen indien nodig
+            string path = @"D:\klantenbeheer\";
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            path += "klanten.txt";
+
             File.WriteAllLines(path, lines);
         }
 
-        private void LoadClients()
-        {
-            string path = @"D:\klantenbeheer\klanten.txt";
-            string[] lines = File.ReadAllLines(path);
-
-            foreach (string line in lines)
-            {
-                string[] splitLine = line.Split(';');
-                AddClient(Convert.ToInt32(splitLine[0]), splitLine[1], splitLine[2], Convert.ToInt32(splitLine[3]),
-                    splitLine[4], splitLine[5], Convert.ToDateTime(splitLine[6]));
-            }
-        }
     }
 }

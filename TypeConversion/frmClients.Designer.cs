@@ -211,7 +211,7 @@ namespace TypeConversion
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(567, 52);
+            this.btnEdit.Location = new System.Drawing.Point(567, 57);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(291, 23);
             this.btnEdit.TabIndex = 12;
@@ -221,7 +221,7 @@ namespace TypeConversion
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(567, 84);
+            this.btnDelete.Location = new System.Drawing.Point(567, 94);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(291, 23);
             this.btnDelete.TabIndex = 13;
@@ -300,12 +300,12 @@ namespace TypeConversion
             this.pnlBack.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pnlBack.Location = new System.Drawing.Point(-7, 165);
             this.pnlBack.Name = "pnlBack";
-            this.pnlBack.Size = new System.Drawing.Size(889, 285);
+            this.pnlBack.Size = new System.Drawing.Size(901, 285);
             this.pnlBack.TabIndex = 15;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(567, 116);
+            this.btnSave.Location = new System.Drawing.Point(567, 131);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(291, 23);
             this.btnSave.TabIndex = 16;
@@ -317,7 +317,7 @@ namespace TypeConversion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(876, 450);
+            this.ClientSize = new System.Drawing.Size(887, 450);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.grid);
             this.Controls.Add(this.btnDelete);
