@@ -111,7 +111,7 @@ namespace TypeConversion
         private void LoadClients()
         {
             // pad aanpassen indien nodig
-            string path = @"D:\klantenbeheer\klanten.txt";
+            string path = @"C:\klantenbeheer\klanten.txt";
 
             if (File.Exists(path))
             {
@@ -225,7 +225,7 @@ namespace TypeConversion
             }
 
             // pad aanpassen indien nodig
-            string path = @"D:\klantenbeheer\";
+            string path = @"C:\klantenbeheer\";
 
             if (!Directory.Exists(path))
             {
